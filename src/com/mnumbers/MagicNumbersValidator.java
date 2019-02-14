@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.System.exit;
+
 public class MagicNumbersValidator {
 
     private static final Map<String, List<String>> MAGIC_NUMBERS = new HashMap<>();
@@ -19,11 +21,22 @@ public class MagicNumbersValidator {
     }
 
     private String extension;
+    private String hexRepresentation;
 
-    private MagicNumbersValidator(String extension) {
+    private MagicNumbersValidator(String extension, String hexRepresentation) {
         this.extension = extension;
+        this.hexRepresentation = hexRepresentation;
     }
 
+    public void lieDetector() {
+        MAGIC_NUMBERS.get(extension).forEach(str -> {
+            if(hexRepresentation.matches(str)) {
+                printSuccessResult();
+                exit(0);
+            }
+        });
+        printFailResult();
+    }
 
     private void printFailResult() {
         System.out.println("Extension lies! It's not a " + extension + " file!");
@@ -33,8 +46,8 @@ public class MagicNumbersValidator {
         System.out.println("Type of this file is " + extension);
     }
 
-    static MagicNumbersValidator of(String extension) {
-        return new MagicNumbersValidator(extension);
+    static MagicNumbersValidator of(String extension, String hexRepresentation) {
+        return new MagicNumbersValidator(extension, hexRepresentation);
     }
 
 

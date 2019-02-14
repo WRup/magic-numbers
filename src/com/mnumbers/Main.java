@@ -1,5 +1,7 @@
 package com.mnumbers;
 
+import org.omg.CORBA.MARSHAL;
+
 import java.util.Scanner;
 
 public class Main {
@@ -10,6 +12,7 @@ public class Main {
         ExtensionValidator extensionValidator = ExtensionValidator.of(filepath);
         FileReader fileReader = FileReader.of(filepath);
         HexConverter hexConverter = HexConverter.of(fileReader.readFile());
+        extensionValidator.validateExtension(hexConverter.getHexRepresentation());
 
     }
 }

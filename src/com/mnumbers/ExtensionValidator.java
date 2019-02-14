@@ -12,6 +12,19 @@ public class ExtensionValidator {
         this.filepath = filepath;
     }
 
+    public void validateExtension(String hexRepresentation) {
+        int startExtensionPosition = filepath.lastIndexOf('.');
+        if(startExtensionPosition > 0) {
+            String extension = filepath.substring(startExtensionPosition + 1);
+            if(extensions.contains(extension)) {
+                MagicNumbersValidator magicNumbersValidator = MagicNumbersValidator.of(extension, hexRepresentation);
+                magicNumbersValidator.lieDetector();
+            }
+        } else {
+            System.out.println("File with this extension isn't handled.");
+        }
+    }
+
     static ExtensionValidator of(String filepath){
         return new ExtensionValidator(filepath);
     }
