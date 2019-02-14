@@ -8,7 +8,7 @@ import static java.lang.System.exit;
 public class ExtensionValidator {
 
     private String filepath;
-    private static final List<String> extensions = Arrays.asList("jpg", "gif", "txt");
+    private static final List<String> EXTENSIONS = Arrays.asList("jpg", "gif", "txt");
 
     private ExtensionValidator(String filepath){
         this.filepath = filepath;
@@ -18,7 +18,7 @@ public class ExtensionValidator {
         int startExtensionPosition = filepath.lastIndexOf('.');
         if(startExtensionPosition > 0) {
             String extension = filepath.substring(startExtensionPosition + 1);
-            if(extensions.contains(extension)) {
+            if(EXTENSIONS.contains(extension)) {
                 MagicNumbersValidator magicNumbersValidator = MagicNumbersValidator.of(extension, hexRepresentation);
                 magicNumbersValidator.lieDetector();
             }

@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        String filepath = "C:\\Users\\Wiktor\\Desktop\\_4273103.txt";
         Scanner scanner = new Scanner(System.in);
+        String filepath = scanner.next();
         ExtensionValidator extensionValidator = ExtensionValidator.of(filepath);
         boolean isTxt = extensionValidator.txtValidator();
         FileReader fileReader = FileReader.of(filepath,isTxt);
