@@ -9,6 +9,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         ExtensionValidator extensionValidator = ExtensionValidator.of(filepath);
         FileReader fileReader = FileReader.of(filepath);
+        HexConverter hexConverter = HexConverter.of(fileReader.readFile());
 
     }
 }
