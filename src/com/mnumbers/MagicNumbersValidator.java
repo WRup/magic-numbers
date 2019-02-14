@@ -22,10 +22,16 @@ public class MagicNumbersValidator {
 
     private String extension;
     private String hexRepresentation;
+    private List<Integer> txtContent;
 
     private MagicNumbersValidator(String extension, String hexRepresentation) {
         this.extension = extension;
         this.hexRepresentation = hexRepresentation;
+    }
+
+    private MagicNumbersValidator(List<Integer> txtContent) {
+        this.txtContent = txtContent;
+        this.extension = "txt";
     }
 
     public void lieDetector() {
@@ -35,10 +41,23 @@ public class MagicNumbersValidator {
                 exit(0);
             }
         });
-        printFailResult();
+        printFailedResult();
+        exit(0);
     }
 
-    private void printFailResult() {
+    public void txtValidator() {
+        txtContent.forEach(i -> {
+            if(i < 0 || i > 127) {
+                printFailedResult();
+                exit(0);
+            } else {
+                printSuccessResult();
+                exit(0);
+            }
+        });
+    }
+
+    private void printFailedResult() {
         System.out.println("Extension lies! It's not a " + extension + " file!");
     }
 
@@ -48,6 +67,10 @@ public class MagicNumbersValidator {
 
     static MagicNumbersValidator of(String extension, String hexRepresentation) {
         return new MagicNumbersValidator(extension, hexRepresentation);
+    }
+
+    static MagicNumbersValidator of(List<Integer> txtContent) {
+        return new MagicNumbersValidator(txtContent);
     }
 
 
